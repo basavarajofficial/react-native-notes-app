@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "notes",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
+    "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
+    "dayjs": "^1.11.13",
     "expo": "~53.0.9",
     "expo-blur": "~14.1.4",
+    "expo-checkbox": "~4.1.4",
     "expo-constants": "~17.1.6",
     "expo-font": "~13.3.1",
     "expo-haptics": "~14.1.4",
@@ -28,22 +31,31 @@
     "expo-symbols": "~0.4.4",
     "expo-system-ui": "~5.0.7",
     "expo-web-browser": "~14.1.6",
+    "lucide": "^0.510.0",
+    "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-native": "0.79.2",
+    "react-native": "^0.79.2",
     "react-native-gesture-handler": "~2.24.0",
-    "react-native-reanimated": "~3.17.4",
-    "react-native-safe-area-context": "5.4.0",
+    "react-native-get-random-values": "^1.11.0",
+    "react-native-paper": "^5.14.4",
+    "react-native-reanimated": "^3.16.2",
+    "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "~4.10.0",
+    "react-native-uuid": "^2.0.3",
     "react-native-web": "~0.20.0",
-    "react-native-webview": "13.13.5"
+    "react-native-webview": "13.13.5",
+    "reanimated": "^0.0.1-alpha",
+    "relative-time": "^1.0.0",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3",
+    "@types/uuid": "^10.0.0",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~9.2.0"
+    "eslint-config-expo": "~9.2.0",
+    "typescript": "~5.8.3"
   },
   "private": true
 }
