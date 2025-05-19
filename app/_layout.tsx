@@ -26,7 +26,7 @@ export default function RootLayout() {
                     <Stack.Screen name="index" options={{ title: "Home" }} />
                     <Stack.Screen name="notes" options={{ headerTitle: "Notes" }} />
                     <Stack.Screen name="note/form" options={{ headerTitle: "Editor" }} />
-                    <Stack.Screen name="readnotes/[id]" options={{ headerShown: false }} />
+                    <Stack.Screen name="readnotes/[id]" options={{headerTitle: "Note", headerShown: false }} />
                 </Stack>
             </PaperProvider>
         </NotesProvider>
