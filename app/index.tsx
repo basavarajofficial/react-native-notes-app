@@ -1,6 +1,6 @@
 
 // @ts-ignore
-import PostImage from "@/assets/images/post-it.png";
+import PostImage from "@/assets/images/notes-icon-main.png";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -8,7 +8,6 @@ import 'react-native-get-random-values';
 
 export default function HomeScreen() {
     const router = useRouter();
-
 
     return (
         <View style={styles.container} >
@@ -57,8 +56,8 @@ export const styles = StyleSheet.create({
         borderRadius: 10
     },
      image: {
-    width: 120,
-    height: 120,
+    width: 200,
+    height: 200,
     marginBottom: 20,
     borderRadius: 10,
   },

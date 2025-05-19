@@ -4,8 +4,8 @@ import { useNotes } from '@/context/NotesContext';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useRef, useState } from 'react';
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Button, Dialog, PaperProvider, Portal } from 'react-native-paper';
+import { FlatList, Image, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Dialog, Portal } from 'react-native-paper';
 
 const NotesMainScreen = () => {
   const router = useRouter();
@@ -59,15 +59,17 @@ const NotesMainScreen = () => {
         title="Notes"
         showBack={true}
         rightIcon={
-          !selectionMode ? (
-            <TouchableOpacity onPress={() => setSelectionMode(true)}>
-              <Text className='text-white'>Select</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity onPress={CancelAction}>
-              <Text className='text-white'>Cancel</Text>
-            </TouchableOpacity>
-          )
+            notes.length > 0 && (
+                !selectionMode ? (
+                  <TouchableOpacity onPress={() => setSelectionMode(true)}>
+                    <Text className='text-white'>Select</Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity onPress={CancelAction}>
+                    <Text className='text-white'>Cancel</Text>
+                  </TouchableOpacity>
+                )
+            )
         }
       />
 
@@ -80,8 +82,8 @@ const NotesMainScreen = () => {
         scrollEventThrottle={16}
         contentContainerStyle={{ paddingBottom: 100, paddingHorizontal: 5 }}
         ListEmptyComponent={
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={styles.NoItemText}>No Notes</Text>
+          <View className='flex-1 items-center justify-center mt-52'>
+            <Image source={require('../assets/images/no-notes.png')} style={{ width: 200, height: 200 }} />
           </View>
         }
         renderItem={({ item }) => (
@@ -110,7 +112,7 @@ const NotesMainScreen = () => {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity className='absolute bottom-10 right-5 bg-blue-500/60 rounded-full p-1'>
-          <Ionicons name="add-circle-outline" size={38} color={"white"} onPress={() => router.push("/addNote")} />
+          <Ionicons name="add-circle-outline" size={38} color={"white"} onPress={() => router.push("/note/form")} />
         </TouchableOpacity>
       )}
 
@@ -132,7 +134,6 @@ const NotesMainScreen = () => {
       )}
       {/* pop up */}
 
-      <PaperProvider>
       <View>
         {/* <Button onPress={showDialog}>Show Dialog</Button> */}
         <Portal>
@@ -148,7 +149,6 @@ const NotesMainScreen = () => {
           </Dialog>
         </Portal>
       </View>
-    </PaperProvider>
     </View>
   );
 };
@@ -160,7 +160,7 @@ export default NotesMainScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#12172C',
     width: '100%',
     position: 'relative',
   },

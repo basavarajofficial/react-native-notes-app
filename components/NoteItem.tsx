@@ -1,8 +1,8 @@
-import { Note } from '@/context/NotesContext'
-import { useRelativeTime } from '@/context/useRelativeTime'
-import { Checkbox } from 'expo-checkbox'
-import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Note } from '@/context/NotesContext';
+import { useRelativeTime } from '@/context/useRelativeTime';
+import { Checkbox } from 'expo-checkbox';
+import React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface NoteItemProps {
   item: Note;
@@ -16,11 +16,13 @@ interface NoteItemProps {
 const NoteItem = ({ item, selected, onToggleSelect, onOpen, onLongPress, selectionMode }: NoteItemProps) => {
      const time = useRelativeTime(item.createdAt);
 
+
+
   return (
     <Pressable onPress={onOpen} onLongPress={onLongPress}>
     <View style={styles.noteItem}>
         <View>
-            <Text style={styles.noteText}>{item.title}</Text>
+            <Text style={styles.noteText} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
             <Text className='text-gray-300 text-base' numberOfLines={1} ellipsizeMode='tail'>{item.content}</Text>
             <Text style={styles.noteSubText}>{time}</Text>
         </View>
@@ -32,12 +34,14 @@ const NoteItem = ({ item, selected, onToggleSelect, onOpen, onLongPress, selecti
         {
             selectionMode && (
                 <Checkbox
+                className='absolute right-4 top-14 -translate-y-1/2'
                     value={selected}
                     onValueChange={onToggleSelect}
                     />
             )
         }
     </View>
+
     </Pressable>
   )
 }
@@ -47,14 +51,14 @@ export default NoteItem
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        // backgroundColor: '#484D6D',
         width: "100%",
         position: "relative",
     },
     noteItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#333',
+        backgroundColor: '#363B58',
         padding: 15,
         borderRadius: 10,
         marginVertical: 5,
@@ -63,6 +67,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "white",
         fontWeight: 'bold',
+        marginRight: 20,
     },
     noteSubText: {
         fontSize: 14,

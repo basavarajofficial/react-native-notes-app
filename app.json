@@ -4,17 +4,27 @@
     "slug": "notes",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/post-it.png",
+    "icon": "./assets/images/notes-icon-main.png",
     "scheme": "notes",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/notes-icon-main.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+    "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/post-it.png",
+        "foregroundImage": "./assets/images/notes-icon-main.png",
         "backgroundColor": "#ffffff"
+      },
+      "splash": {
+        "resizeMode": "contain",
+        "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.basavaraj007.notes"
@@ -29,7 +39,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/post-it.png",
+          "image": "./assets/images/notes-icon-main.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -47,7 +57,11 @@
     },
     "updates": {
       "enabled": true,
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/8e7ca082-14e6-4708-baad-4dccf5256b89"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }

@@ -18,6 +18,7 @@ export type Note = {
 type NotesContextType = {
   notes: Note[];
   addNote: (title: string, content: string) => void;
+  updateNote:(updated: { id: string; title: string; content: string }) => void;
   deleteNote: (id: string) => void;
   deleteMultipleNotes: (ids: string[]) => void;
 };
@@ -59,8 +60,12 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       createdAt: new Date().toISOString(),
     };
 
-    setNotes((prev) => [newNote, ...prev]);
+    setNotes([...notes, newNote,]);
   };
+
+  const updateNote = (updated: { id: string; title: string; content: string }) => {
+    setNotes(notes.map(note => note.id === updated.id ? { ...note, ...updated } : note));
+  }
 
   const deleteNote = (id: string) => {
     setNotes((prev) => prev.filter(note => note.id !== id))
@@ -71,7 +76,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 };
 
   return (
-    <NotesContext.Provider value={{ notes, addNote, deleteNote, deleteMultipleNotes }}>
+    <NotesContext.Provider value={{ notes, addNote, updateNote, deleteNote, deleteMultipleNotes }}>
       {children}
     </NotesContext.Provider>
   );

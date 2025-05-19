@@ -1,32 +1,42 @@
 import { useNotes } from "@/context/NotesContext";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function NoteEditor() {
+const NoteEditor =() => {
+    const { notes, addNote, updateNote } = useNotes();
+     const { id } = useLocalSearchParams(); // id present? => edit mode
+     const isEditMode = !!id;
+     const existingNote = notes.find(note => note.id === id);
+
     const router = useRouter();
-    const { addNote } = useNotes();
   const [note, setNote] = useState({
     title: "",
     content: "",
   });
 
+  useEffect(() => {
+    if(isEditMode && existingNote ){
+        setNote({
+            title: existingNote.title,
+            content: existingNote.content
+        })
+    }
+  }, [id]);
+
   const onSubmit = () => {
-    console.log("submitted", note);
-    addNote(note.title, note.content);
+    if(isEditMode && existingNote){
+        updateNote({...existingNote, ...note});
+    }else{
+        addNote(note.title, note.content);
+    }
     router.back();
   }
 
   return (
     <KeyboardAvoidingView
-      style={{
-        flex: 1,
-        backgroundColor: 'black',
-        width: '100%',
-        position: 'relative'
-       }}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      style={{ flex: 1, backgroundColor: "#12172c" }}
     >
     <SafeAreaView className="flex-row items-center justify-between px-2">
       <View className='flex-row items-center justify-start gap-5 p-4' >
@@ -49,6 +59,7 @@ export default function NoteEditor() {
           placeholder="Title"
           placeholderTextColor="#999"
           value={note.title}
+          multiline
           onChangeText={(text => setNote({ ...note, title: text }))}
         />
         <View className={"my-4 h-0.5 bg-gray-600"}></View>
@@ -66,3 +77,5 @@ export default function NoteEditor() {
     </KeyboardAvoidingView>
   );
 }
+
+export default NoteEditor;
