@@ -1,10 +1,14 @@
 
 // @ts-ignore
 import PostImage from "@/assets/images/notes-icon-main.png";
+import { registerRootComponent } from "expo";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import 'react-native-get-random-values';
+import App from "./App";
+
+registerRootComponent(App);
 
 export default function HomeScreen() {
     const router = useRouter();
