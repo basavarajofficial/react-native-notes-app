@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/post-it.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.basavaraj007.notes"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,16 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "8e7ca082-14e6-4708-baad-4dccf5256b89"
+      }
+    },
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0
     }
   }
 }

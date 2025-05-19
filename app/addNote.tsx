@@ -20,7 +20,12 @@ export default function NoteEditor() {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{
+        flex: 1,
+        backgroundColor: 'black',
+        width: '100%',
+        position: 'relative'
+       }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
     <SafeAreaView className="flex-row items-center justify-between px-2">

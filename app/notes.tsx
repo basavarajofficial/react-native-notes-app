@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Dialog, PaperProvider, Portal } from 'react-native-paper';
 
 const NotesMainScreen = () => {
   const router = useRouter();
@@ -13,6 +14,8 @@ const NotesMainScreen = () => {
   const [selectedNoteIds, setSelectedNoteIds] = useState<Set<string>>(new Set());
   const [selectionMode, setSelectionMode] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  const [visible, setVisible] = useState(false);
 
   const flatListRef = useRef<FlatList>(null);
 
@@ -34,6 +37,22 @@ const NotesMainScreen = () => {
     flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
   };
 
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+
+  const deleteSelectedNotes =() => {
+    deleteMultipleNotes(Array.from(selectedNoteIds));
+    setSelectionMode(false);
+    setSelectedNoteIds(new Set());
+    setVisible(false);
+  }
+
+  const CancelAction = () => {
+    setSelectionMode(false);
+    setSelectedNoteIds(new Set());
+    setVisible(false);
+  }
+
   return (
     <View style={styles.container}>
       <CustomHeader
@@ -45,10 +64,7 @@ const NotesMainScreen = () => {
               <Text className='text-white'>Select</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => {
-              setSelectionMode(false);
-              setSelectedNoteIds(new Set());
-            }}>
+            <TouchableOpacity onPress={CancelAction}>
               <Text className='text-white'>Cancel</Text>
             </TouchableOpacity>
           )
@@ -90,11 +106,7 @@ const NotesMainScreen = () => {
       {/* Floating Add or Delete Button */}
       {selectedNoteIds.size > 0 ? (
         <TouchableOpacity className='absolute bottom-10 right-5 rounded-full p-1'>
-          <Ionicons name='trash' color="red" size={38} onPress={() => {
-            deleteMultipleNotes(Array.from(selectedNoteIds));
-            setSelectedNoteIds(new Set());
-            setSelectionMode(false);
-          }} />
+            <Ionicons name='trash' color="red" size={38} onPress={showDialog}  />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity className='absolute bottom-10 right-5 bg-blue-500/60 rounded-full p-1'>
@@ -118,6 +130,25 @@ const NotesMainScreen = () => {
           <Ionicons name="arrow-up" size={28} color="white" />
         </TouchableOpacity>
       )}
+      {/* pop up */}
+
+      <PaperProvider>
+      <View>
+        {/* <Button onPress={showDialog}>Show Dialog</Button> */}
+        <Portal>
+          <Dialog visible={visible} onDismiss={hideDialog}>
+            <Dialog.Title>Delete Note</Dialog.Title>
+            <Dialog.Content>
+              <Text className='text-white'>This action can&apos;t be undone</Text>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={CancelAction}>Cancel</Button>
+              <Button onPress={deleteSelectedNotes}>Delete</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+      </View>
+    </PaperProvider>
     </View>
   );
 };
